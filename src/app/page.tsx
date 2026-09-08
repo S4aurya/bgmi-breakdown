@@ -1,18 +1,19 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
-import { Map, Crosshair, ShieldAlert, Trophy, Zap, Medal, Users } from 'lucide-react';
+import { Map, Crosshair, ShieldAlert, Trophy, Zap, Medal, Users, Globe, TrendingUp, Award, ArrowRight, Shield } from 'lucide-react';
+import { INTERNATIONAL_STATS } from '@/data/bgmi';
 
 const TICKER_ITEMS = [
-  { tag: 'TOOLKIT', tagColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40', text: 'Points Calculator Online: Full PointCalc Features 100% Free' },
-  { tag: 'CIRCUIT', tagColor: 'bg-amber-500/20 text-amber-300 border-amber-500/40', text: 'BGIS 2026 Finals Ongoing: INR 2,00,00,000 Prize Pool' },
-  { tag: 'ESPORTS', tagColor: 'bg-blue-500/20 text-blue-300 border-blue-500/40', text: 'BMPS Season 4 Scheduled: Registration Opens October 2026' },
-  { tag: 'TERRAIN', tagColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40', text: 'Rondo Map Season 2 Terrain Adjustments Deployed' },
-  { tag: 'BALLISTICS', tagColor: 'bg-orange-500/20 text-orange-300 border-orange-500/40', text: 'M416 Recoil Baseline Adjusted in Patch 3.4' },
-  { tag: 'RANKINGS', tagColor: 'bg-pink-500/20 text-pink-300 border-pink-500/40', text: 'Jonathan Retains National Rank 1 Rating with 8.2 KD' },
-  { tag: 'GLOBAL', tagColor: 'bg-purple-500/20 text-purple-300 border-purple-500/40', text: 'Team Soul Secures Direct Qualification for PMGC 2026' },
-  { tag: 'PRIZE', tagColor: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/40', text: 'PMGC 2026 Total Prize Purse: USD 2,00,00,000' },
-  { tag: 'ATHLETE', tagColor: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40', text: 'Spower Advances +3 Positions in Pro Player Power Rankings' },
+  { tag: 'BGIS 2026', tagColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40', text: 'iQOO SOUL Crowned BGIS 2026 Champions in Chennai (173 Pts / INR 1 Crore / 600K+ Peak CCV)' },
+  { tag: 'BMPS 2026', tagColor: 'bg-orange-500/20 text-orange-300 border-orange-500/40', text: 'Hero Xtreme GodLike Captures First BMPS Trophy; Secures Direct PMWC Paris Slot' },
+  { tag: 'GLOBAL EWC', tagColor: 'bg-purple-500/20 text-purple-300 border-purple-500/40', text: 'GodLike Esports Represents India at PMWC (Esports World Cup) in Paris: USD 3,000,000 Purse' },
+  { tag: 'MAP POOL', tagColor: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40', text: 'Official 4-Map Competitive Rotation Active: Erangel, Miramar, Rondo, Livik (Sanhok & Vikendi Retired)' },
+  { tag: 'BGIS MVP', tagColor: 'bg-pink-500/20 text-pink-300 border-pink-500/40', text: 'HunterZ (Genesis) Awarded BGIS 2026 Tournament MVP; LEGIT (SOUL) Named Finals MVP' },
+  { tag: 'ELIMINATOR', tagColor: 'bg-amber-500/20 text-amber-300 border-amber-500/40', text: 'Jonathan Secures BMPS 2026 Eliminator Distinction with 8.4 Tournament KD High' },
+  { tag: 'GRASSROOTS', tagColor: 'bg-blue-500/20 text-blue-300 border-blue-500/40', text: 'HEXVORA Crowned Champions of Inaugural Krafton Naye Khiladi 2026' },
+  { tag: 'CIRCUIT 2026', tagColor: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/40', text: 'PMGC 2026 Global Finale Announced with USD 3,000,000 (~INR 25.2 Crore) Purse' },
+  { tag: 'FREE TOOL', tagColor: 'bg-teal-500/20 text-teal-300 border-teal-500/40', text: 'Esports Points Table & Single Squad Calculator: 100% Free PointCalc Alternative' },
 ];
 
 const SECTIONS = [
@@ -32,9 +33,9 @@ const SECTIONS = [
     href: '/maps',
     icon: Map,
     title: 'Maps and Drop Strategy',
-    detail: 'Erangel, Miramar, Sanhok, Livik, Rondo',
-    description: 'Hot-drop threat tiers, high-probability vehicle spawn corridors, and compound fortification points across all five battlegrounds.',
-    badge: '5 Battlefields',
+    detail: 'Erangel, Miramar, Rondo, Livik',
+    description: 'Standard 4-map competitive rotation. Hot-drop threat tiers, high-probability vehicle spawn corridors, and compound fortification points (Sanhok and Vikendi retired).',
+    badge: '4 Competitive Maps',
     color: 'emerald',
     iconBg: 'bg-emerald-500/15 border-emerald-500/30 text-emerald-400',
     badgeStyle: 'bg-emerald-950/60 text-emerald-300 border-emerald-500/30',
@@ -68,9 +69,9 @@ const SECTIONS = [
     href: '/esports',
     icon: Trophy,
     title: 'Esports Tournament Tracker',
-    detail: 'BGIS 2026, BMPS Season 4, PMGC',
+    detail: 'BGIS 2026, BMPS 2026, PMWC Paris',
     description: 'Live tournament brackets, team rosters, seed distributions, and verified pro meta loadout strategies.',
-    badge: '3 Major Events',
+    badge: 'Official Krafton Circuit',
     color: 'amber',
     iconBg: 'bg-amber-500/15 border-amber-500/30 text-amber-400',
     badgeStyle: 'bg-amber-950/60 text-amber-300 border-amber-500/30',
@@ -218,8 +219,200 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── International Stats & Global Circuit Standings (3-Column Telemetry Dashboard) ── */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-white/10" aria-label="International Stats & Global Circuit">
+        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between mb-8 gap-3">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/15 border border-purple-500/30 text-xs font-mono uppercase tracking-wider text-purple-300 font-bold mb-2.5">
+              <Globe className="w-3.5 h-3.5 text-purple-400" />
+              Global Circuit Telemetry
+            </div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-white">
+              International Stats & Global Standings
+            </h2>
+            <p className="text-sm sm:text-base font-normal text-slate-300 mt-1 max-w-3xl leading-relaxed">
+              Official Krafton international data comparing Indian squads on the world stage against Tier 1 international powerhouses (PMWC Esports World Cup, PMGC, and PMSL).
+            </p>
+          </div>
+          <Link
+            href="/esports"
+            className="inline-flex items-center gap-2 text-xs font-mono font-bold text-purple-400 hover:text-purple-300 transition-colors shrink-0"
+          >
+            <span>Full Esports Tracker</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+
+        {/* 3-Column Tactical Display */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+          {/* Column 1: Indian Squads on Global Stage */}
+          <div className="rounded-2xl border border-purple-500/30 bg-[#121829] p-6 shadow-lg flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between gap-3 mb-5 border-b border-white/10 pb-4">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-lg bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-400">
+                    <Shield className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-black text-white">India on Global Stage</h3>
+                    <div className="text-xs font-mono text-purple-300">PMWC Paris & PMGC Pathway</div>
+                  </div>
+                </div>
+                <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-purple-950/70 border border-purple-500/30 text-purple-300 font-bold">
+                  Active Seeds
+                </span>
+              </div>
+
+              <div className="space-y-4">
+                {INTERNATIONAL_STATS.indianSquadsGlobal.map((squad) => (
+                  <div key={squad.teamName} className="p-4 rounded-xl border border-slate-800 bg-[#0d1322]">
+                    <div className="flex items-center justify-between gap-2 mb-1.5">
+                      <span className="font-black text-white text-base">{squad.teamName}</span>
+                      <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                        {squad.tag}
+                      </span>
+                    </div>
+                    <div className="text-xs font-mono text-amber-400 font-bold mb-1">
+                      {squad.tournament}
+                    </div>
+                    <div className="flex items-center justify-between text-xs font-mono text-slate-400 mb-2">
+                      <span>Result: <strong className="text-white">{squad.placement}</strong></span>
+                      <span className="text-emerald-400 font-bold">{squad.earnings}</span>
+                    </div>
+                    <p className="text-xs text-slate-300 leading-relaxed">
+                      {squad.highlight}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-5 pt-4 border-t border-slate-800 text-xs font-mono text-slate-400 flex items-center justify-between">
+              <span>Total Global Purse</span>
+              <span className="text-purple-300 font-bold">{INTERNATIONAL_STATS.totalGlobalPrizePurse}</span>
+            </div>
+          </div>
+
+          {/* Column 2: World Power Rankings */}
+          <div className="rounded-2xl border border-blue-500/30 bg-[#121829] p-6 shadow-lg flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between gap-3 mb-5 border-b border-white/10 pb-4">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-lg bg-blue-500/20 border border-blue-500/40 flex items-center justify-center text-blue-400">
+                    <Award className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-black text-white">World Power Rankings</h3>
+                    <div className="text-xs font-mono text-blue-300">Krafton Global Rating Index</div>
+                  </div>
+                </div>
+                <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-blue-950/70 border border-blue-500/30 text-blue-300 font-bold">
+                  Top 6 Elite
+                </span>
+              </div>
+
+              <div className="space-y-2.5">
+                {INTERNATIONAL_STATS.globalRankings.map((team) => (
+                  <div
+                    key={team.name}
+                    className={`p-3 rounded-xl border flex items-center justify-between gap-3 ${
+                      team.tag === 'GODL'
+                        ? 'border-orange-500/40 bg-orange-950/20'
+                        : 'border-slate-800/90 bg-[#0d1322]'
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className={`w-7 h-7 rounded-lg text-xs font-mono font-black flex items-center justify-center ${
+                        team.rank === 1
+                          ? 'bg-amber-400 text-slate-950 font-black'
+                          : team.rank === 2
+                          ? 'bg-slate-300 text-slate-950 font-black'
+                          : team.rank === 3
+                          ? 'bg-amber-700 text-white font-black'
+                          : 'bg-slate-900 border border-slate-700 text-slate-300'
+                      }`}>
+                        {team.rank}
+                      </span>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-extrabold text-white text-sm">{team.name}</span>
+                          <span className="text-[10px] font-mono text-slate-400">[{team.region.split(' ')[0]}]</span>
+                        </div>
+                        <div className="text-[11px] text-slate-400 truncate max-w-[190px]">
+                          {team.notableAchievement}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="text-right shrink-0">
+                      <div className="text-xs font-mono font-bold text-amber-400">Rating {team.rating}</div>
+                      <div className="text-[10px] font-mono text-slate-400">{team.wwcd} WWCD &middot; KD {team.kd}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-5 pt-4 border-t border-slate-800 text-xs font-mono text-slate-400 flex items-center justify-between">
+              <span>Circuit Status</span>
+              <span className="text-blue-300 font-bold">{INTERNATIONAL_STATS.activeGlobalCircuit}</span>
+            </div>
+          </div>
+
+          {/* Column 3: National vs Global Telemetry Benchmarks */}
+          <div className="rounded-2xl border border-emerald-500/30 bg-[#121829] p-6 shadow-lg flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between gap-3 mb-5 border-b border-white/10 pb-4">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-lg bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+                    <TrendingUp className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-black text-white">National vs Global Telemetry</h3>
+                    <div className="text-xs font-mono text-emerald-300">Benchmark Discrepancy Index</div>
+                  </div>
+                </div>
+                <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-emerald-950/70 border border-emerald-500/30 text-emerald-300 font-bold">
+                  Verified Data
+                </span>
+              </div>
+
+              <div className="space-y-3.5">
+                {INTERNATIONAL_STATS.metricComparisons.map((item) => (
+                  <div key={item.metric} className="p-3.5 rounded-xl border border-slate-800 bg-[#0d1322]">
+                    <div className="text-xs font-mono font-bold text-slate-300 uppercase tracking-wider mb-2">
+                      {item.metric}
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 mb-2">
+                      <div className="p-2 rounded-lg bg-slate-900/90 border border-slate-800 text-center">
+                        <div className="text-[10px] font-mono text-slate-400 uppercase font-bold">India Circuit</div>
+                        <div className="text-xs font-mono font-black text-orange-400 mt-0.5">{item.nationalValue}</div>
+                      </div>
+                      <div className="p-2 rounded-lg bg-slate-900/90 border border-slate-800 text-center">
+                        <div className="text-[10px] font-mono text-slate-400 uppercase font-bold">Global Tier 1</div>
+                        <div className="text-xs font-mono font-black text-cyan-400 mt-0.5">{item.internationalValue}</div>
+                      </div>
+                    </div>
+                    <p className="text-xs text-slate-300 leading-relaxed font-normal">
+                      {item.tacticalImplication}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-5 pt-4 border-t border-slate-800 flex items-center justify-between text-xs font-mono text-slate-400">
+              <span>Telemetry Source</span>
+              <span className="text-emerald-300 font-bold">Krafton Esports Official</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
       {/* ── Free PointCalc Feature Highlight Banner ── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
         <div className="rounded-2xl border border-blue-500/30 bg-gradient-to-r from-blue-950/40 via-[#141b2c] to-cyan-950/30 p-8 sm:p-10 shadow-lg shadow-blue-950/20">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
@@ -242,16 +435,16 @@ export default function HomePage() {
       </section>
 
       {/* ── Operational Tournament Banner with Rich Gold/Amber Palette ── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
         <div className="rounded-2xl border border-amber-500/30 bg-gradient-to-r from-amber-950/40 via-[#141b2c] to-orange-950/30 p-8 sm:p-10 shadow-lg shadow-amber-950/20">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-xs font-mono uppercase tracking-wider text-amber-300 font-bold mb-3">
-                Active National Circuit
+                Official Krafton Tournament Telemetry
               </div>
-              <h3 className="text-2xl sm:text-3xl font-black text-white">BGIS 2026 Grand Finals Stage</h3>
+              <h3 className="text-2xl sm:text-3xl font-black text-white">BGIS & BMPS 2026 Championship Dossier</h3>
               <p className="text-base text-slate-300 mt-2 max-w-2xl leading-relaxed">
-                64 squads contending for a prize pool of INR 2,00,00,000. Track live tournament rosters, standings, match schedules, and active weapon meta shifts.
+                iQOO SOUL captured the BGIS 2026 title in Chennai (173 pts, INR 1 Crore) while Hero Xtreme GodLike secured the BMPS 2026 trophy to represent India at the PMWC 2026 (Esports World Cup) in Paris. Track verified tournament brackets, scores, and active meta shifts.
               </p>
             </div>
             <Link

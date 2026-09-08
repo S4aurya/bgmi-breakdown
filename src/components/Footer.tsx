@@ -89,15 +89,15 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 shrink-0" />
-                <span>Tournament Scope: BGIS, BMPS, and PMGC</span>
+                <span>Tournament Scope: BGIS 2026, BMPS 2026, PMWC Paris, and PMGC</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 shrink-0" />
-                <span>Coverage: All five competitive maps including Rondo</span>
+                <span>Competitive Maps: 4 Active (Erangel, Miramar, Rondo, Livik)</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-2 shrink-0" />
-                <span>Verification: Hand-tested recoil and zone timers</span>
+                <span>Official Source: <a href="https://kraftonindiaesports.com" target="_blank" rel="noopener noreferrer" className="text-purple-300 hover:text-purple-200 underline font-medium">kraftonindiaesports.com</a></span>
               </li>
             </ul>
           </div>
@@ -105,7 +105,7 @@ export default function Footer() {
 
         {/* Bottom Legal & Attribution */}
         <div className="mt-12 pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-400">
-          <span>Not affiliated with Krafton, Inc. Community tactical guide.</span>
+          <span>Official tournament telemetry sourced via <a href="https://kraftonindiaesports.com" target="_blank" rel="noopener noreferrer" className="text-slate-300 hover:text-white underline">Krafton India Esports</a>.</span>
           <span className="font-medium text-slate-300">Curated by Disaster</span>
         </div>
       </div>

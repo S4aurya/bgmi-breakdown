@@ -4,8 +4,8 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'BGMI Breakdown — The Ultimate BGMI Intelligence Hub',
-  description: 'Maps, weapons, zone analysis, esports corner, sensitivity guides & redeem codes for Battlegrounds Mobile India.',
+  title: 'BGMI Breakdown: Official BGMI Tactical Intelligence Hub',
+  description: 'Official competitive map strategies, weapon benchmarks, zone analysis, Krafton tournament telemetry, international stats, and free points calculator for Battlegrounds Mobile India.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
