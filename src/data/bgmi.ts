@@ -84,37 +84,28 @@ export const MAPS: BGMIMap[] = [
     vehicleTip: 'Utilize peak-to-peak cable cars for vertical transit over contested roads without engine noise.',
     tacticalTip: 'Master the central zipline network linking Jade Palace to central transit hubs for rapid circle rotation advantages.',
   },
-  {
-    id: 'livik',
-    name: 'Livik',
-    size: '2x2 km',
-    theme: 'Nordic Terrain',
-    accent: '#06b6d4',
-    description: 'A compact 2x2 competitive battleground for rapid 15-minute high-tempo matches. Features upgraded XT crate weapons and accelerated zone shrink intervals.',
-    hotDrops: [
-      { name: 'Midstein', loot: 'S', risk: 'Extreme', tip: 'Densely packed residential sector with the highest combat encounter rate on the map.' },
-      { name: 'Power Plant', loot: 'A', risk: 'High', tip: 'Industrial zone housing weapon upgrade terminals and high-tier defensive gear.' },
-      { name: 'Hot Springs', loot: 'B', risk: 'Medium', tip: 'Provides passive health regeneration pools for rapid recovery following skirmishes.' },
-      { name: 'Waterfall Cavern', loot: 'B', risk: 'Medium', tip: 'Concealed cavern offering guaranteed crate spawns and quick water egress.' },
-    ],
-    vehicleTip: 'Monster Trucks negotiate steep vertical cliff faces with ease. Utilize them to claim otherwise inaccessible ridge points.',
-    tacticalTip: 'Secure XT upgrade crates from Power Plant early. Upgraded XT variants exhibit tighter recoil recovery patterns.',
-  },
 ];
 
 export const RETIRED_COMPETITIVE_MAPS: RetiredMap[] = [
   {
+    id: 'livik',
+    name: 'Livik',
+    size: '2x2 km',
+    retirementReason: 'Excluded from the official Tier 1 Krafton competitive tournament rulebook. Designed as a casual 15-minute arcade battleground with XT weapon upgrade crates and accelerated zone collapse, non-standard for 16-squad competitive match integrity.',
+    status: 'Casual / Non-Competitive',
+  },
+  {
     id: 'sanhok',
     name: 'Sanhok',
     size: '4x4 km',
-    retirementReason: 'Officially retired from Krafton India Esports competitive pool due to compressed engagement spaces, excessive third-party frequency, and dense foliage enabling passive prone combat.',
+    retirementReason: 'Officially retired from Krafton competitive pool due to compressed engagement spaces, excessive third-party frequency, and dense foliage enabling passive prone combat.',
     status: 'Retired from Competitive Pool',
   },
   {
     id: 'vikendi',
     name: 'Vikendi',
     size: '6x6 km',
-    retirementReason: 'Officially retired from competitive rulebook rotation. Excessive compound clusters, high visual noise, and circle shift RNG led Krafton organizers to standardize on Erangel, Miramar, Rondo, and Livik.',
+    retirementReason: 'Officially retired from competitive rulebook rotation. Excessive compound clusters, high visual noise, and circle shift RNG led Krafton organizers to standardize on Erangel, Miramar, and Rondo.',
     status: 'Retired from Competitive Pool',
   },
 ];
@@ -811,19 +802,48 @@ export interface NationalVsGlobalMetric {
   tacticalImplication: string;
 }
 
+export interface GlobalPlayer {
+  rank: number;
+  name: string;
+  realName: string;
+  team: string;
+  teamTag: string;
+  region: string;
+  role: 'Fragger' | 'IGL' | 'Sniper' | 'All-Rounder';
+  kd: number;
+  avgDamage: number;
+  finishesPerMatch: number;
+  rating: number;
+  signatureWeapon: string;
+  notableAccolade: string;
+}
+
+export interface GlobalTournamentInfo {
+  name: string;
+  shortName: string;
+  tier: string;
+  prizePool: string;
+  location: string;
+  dates: string;
+  champion: string;
+  format: string;
+}
+
 export interface InternationalStatsData {
   summary: string;
   activeGlobalCircuit: string;
   totalGlobalPrizePurse: string;
   globalRankings: InternationalTeam[];
+  globalPlayers: GlobalPlayer[];
+  globalTournaments: GlobalTournamentInfo[];
   indianSquadsGlobal: IndianGlobalTrackRecord[];
   metricComparisons: NationalVsGlobalMetric[];
 }
 
 export const INTERNATIONAL_STATS: InternationalStatsData = {
-  summary: 'Official Krafton international telemetry comparing Indian competitive circuit benchmarks against Tier 1 global battle royale leagues: PMWC (Esports World Cup Paris), PMGC, and PMSL.',
+  summary: 'Official PUBG Mobile global esports telemetry comparing worldwide team power ratings, international player rankings, and Tier 1 championship metrics (PMWC Paris at Esports World Cup, PMGC, PMGO, and PMSL).',
   activeGlobalCircuit: 'Esports World Cup & PMGC Circuit 2026',
-  totalGlobalPrizePurse: 'USD 6,000,000+ (~INR 50+ Crore)',
+  totalGlobalPrizePurse: 'USD 6,500,000+ (~INR 54+ Crore)',
   globalRankings: [
     {
       rank: 1,
@@ -833,40 +853,40 @@ export const INTERNATIONAL_STATS: InternationalStatsData = {
       rating: 99,
       wwcd: 18,
       kd: 4.8,
-      notableAchievement: 'PMWC 2026 Champions & PMSL Americas Dominance',
+      notableAchievement: 'PMGC World Champions & PMSL Americas Dominance',
       status: 'World Rank 1',
     },
     {
       rank: 2,
-      name: 'IHC Esports',
-      tag: 'IHC',
-      region: 'East Asia (Mongolia)',
-      rating: 98,
+      name: 'Vampire Esports',
+      tag: 'VPE',
+      region: 'Southeast Asia (Thailand)',
+      rating: 97,
       wwcd: 15,
-      kd: 4.6,
-      notableAchievement: 'PMGC World Champions & Superior Phase 5 Hold Ratio',
+      kd: 4.5,
+      notableAchievement: 'Two-time PMWI Champions & High-Tempo Compound Control',
       status: 'World Rank 2',
     },
     {
       rank: 3,
-      name: 'Vampire Esports',
-      tag: 'VPE',
-      region: 'Southeast Asia (Thailand)',
+      name: 'D\'Xavier',
+      tag: 'DX',
+      region: 'Southeast Asia (Vietnam)',
       rating: 96,
       wwcd: 14,
-      kd: 4.4,
-      notableAchievement: 'Two-time PMWI Champions & High-Tempo Compound Clearing',
+      kd: 4.3,
+      notableAchievement: 'PMSL SEA Champions & Flawless Mid-Range Suppression',
       status: 'World Rank 3',
     },
     {
       rank: 4,
-      name: 'D\'Xavier',
-      tag: 'DX',
-      region: 'Southeast Asia (Vietnam)',
-      rating: 95,
+      name: 'Reject',
+      tag: 'RC',
+      region: 'East Asia (Japan)',
+      rating: 94,
       wwcd: 12,
       kd: 4.2,
-      notableAchievement: 'PMSL SEA Champions & Precision DMR Suppression',
+      notableAchievement: 'PMGO World Champions & Unmatched Ridge Defense',
       status: 'World Rank 4',
     },
     {
@@ -877,19 +897,257 @@ export const INTERNATIONAL_STATS: InternationalStatsData = {
       rating: 93,
       wwcd: 11,
       kd: 4.1,
-      notableAchievement: 'BMPS 2026 Champions, PMWC Paris Grand Finalists & EWC Club Partner',
-      status: 'India Seed 1 (World Top 5)',
+      notableAchievement: 'BMPS 2026 Champions, PMWC Paris Finalists & EWC Club Partner',
+      status: 'World Rank 5 (India Seed 1)',
     },
     {
       rank: 6,
+      name: 'Wolves Esports',
+      tag: 'WOL',
+      region: 'China (PEL)',
+      rating: 92,
+      wwcd: 11,
+      kd: 4.0,
+      notableAchievement: 'PEL Champions & High Point-Yield Compound Assaults',
+      status: 'World Rank 6',
+    },
+    {
+      rank: 7,
       name: 'Talon Esports',
       tag: 'TLN',
       region: 'Asia Pacific',
       rating: 91,
       wwcd: 10,
       kd: 3.9,
-      notableAchievement: 'PMSL Regional Contender & Elite Open Field Rotations',
-      status: 'World Rank 6',
+      notableAchievement: 'PMSL Regional Masters & Elite Vehicle Intercept Formations',
+      status: 'World Rank 7',
+    },
+    {
+      rank: 8,
+      name: '4AM eSports',
+      tag: '4AM',
+      region: 'China (PEL)',
+      rating: 90,
+      wwcd: 9,
+      kd: 3.8,
+      notableAchievement: 'PMGC Multi-Year Finalists & Disciplined Split Rotations',
+      status: 'World Rank 8',
+    },
+    {
+      rank: 9,
+      name: 'iQOO SOUL',
+      tag: 'SOUL',
+      region: 'South Asia (India)',
+      rating: 89,
+      wwcd: 9,
+      kd: 3.8,
+      notableAchievement: 'BGIS 2026 Chennai Champions (173 pts) & Global Invite Contender',
+      status: 'World Rank 9',
+    },
+    {
+      rank: 10,
+      name: 'Alter Ego Ares',
+      tag: 'AE',
+      region: 'Southeast Asia (Indonesia)',
+      rating: 88,
+      wwcd: 8,
+      kd: 3.7,
+      notableAchievement: 'Back-to-Back PMSL SEA Champions & Dense Smoke Maneuvers',
+      status: 'World Rank 10',
+    },
+  ],
+  globalPlayers: [
+    {
+      rank: 1,
+      name: 'Carrilho',
+      realName: 'Lucas Miguel',
+      team: 'Alpha7 Esports',
+      teamTag: 'A7',
+      region: 'Brazil (Americas)',
+      role: 'Fragger',
+      kd: 4.8,
+      avgDamage: 895,
+      finishesPerMatch: 2.4,
+      rating: 99,
+      signatureWeapon: 'M416 and DBS',
+      notableAccolade: 'PMGC World Champion MVP & S-Tier Global Fragger of the Year',
+    },
+    {
+      rank: 2,
+      name: 'TonyK',
+      realName: 'Nattawut Muensa',
+      team: 'Vampire Esports',
+      teamTag: 'VPE',
+      region: 'Thailand (Southeast Asia)',
+      role: 'Fragger',
+      kd: 4.6,
+      avgDamage: 880,
+      finishesPerMatch: 2.3,
+      rating: 98,
+      signatureWeapon: 'Beryl M762 and M416',
+      notableAccolade: 'Two-time PMWI Tournament MVP & Highest Knock Rate in SEA',
+    },
+    {
+      rank: 3,
+      name: 'Revo',
+      realName: 'Gabriel Henrique',
+      team: 'Alpha7 Esports',
+      teamTag: 'A7',
+      region: 'Brazil (Americas)',
+      role: 'All-Rounder',
+      kd: 4.4,
+      avgDamage: 840,
+      finishesPerMatch: 2.1,
+      rating: 97,
+      signatureWeapon: 'M416 and Mini 14',
+      notableAccolade: 'PMWC 2026 Paris Eliminator Distinction & Clutch Anchor',
+    },
+    {
+      rank: 4,
+      name: 'Jonathan',
+      realName: 'Jonathan Amaral',
+      team: 'Hero Xtreme GodLike',
+      teamTag: 'GODL',
+      region: 'India (South Asia)',
+      role: 'Fragger',
+      kd: 4.3,
+      avgDamage: 865,
+      finishesPerMatch: 2.2,
+      rating: 96,
+      signatureWeapon: 'Beryl M762',
+      notableAccolade: 'BMPS 2026 Eliminator & PMWC 2026 Paris Grand Finalist',
+    },
+    {
+      rank: 5,
+      name: 'Paraboy',
+      realName: 'Zhu Bocheng',
+      team: 'Wolves Esports',
+      teamTag: 'WOL',
+      region: 'China (PEL)',
+      role: 'Fragger',
+      kd: 4.2,
+      avgDamage: 830,
+      finishesPerMatch: 2.0,
+      rating: 95,
+      signatureWeapon: 'M416 and DP-28',
+      notableAccolade: '2x Global Championship MVP & Esports Hall of Fame Inductee',
+    },
+    {
+      rank: 6,
+      name: 'Reon',
+      realName: 'Reon Sugimoto',
+      team: 'Reject',
+      teamTag: 'RC',
+      region: 'Japan (East Asia)',
+      role: 'Fragger',
+      kd: 4.1,
+      avgDamage: 815,
+      finishesPerMatch: 1.9,
+      rating: 94,
+      signatureWeapon: 'M416 and SLR',
+      notableAccolade: 'PMGO 2024 Champion MVP & Tactical Flank Specialist',
+    },
+    {
+      rank: 7,
+      name: 'Guizão',
+      realName: 'Guilherme Mattos',
+      team: 'Alpha7 Esports',
+      teamTag: 'A7',
+      region: 'Brazil (Americas)',
+      role: 'Sniper',
+      kd: 4.0,
+      avgDamage: 790,
+      finishesPerMatch: 1.8,
+      rating: 93,
+      signatureWeapon: 'AWM and Mini 14',
+      notableAccolade: 'PMGC World Champion Anchor & Longest Knock Record in Finals',
+    },
+    {
+      rank: 8,
+      name: 'Rabiz',
+      realName: 'Dinh Duong',
+      team: 'D\'Xavier',
+      teamTag: 'DX',
+      region: 'Vietnam (Southeast Asia)',
+      role: 'IGL',
+      kd: 3.9,
+      avgDamage: 775,
+      finishesPerMatch: 1.7,
+      rating: 92,
+      signatureWeapon: 'M416',
+      notableAccolade: 'PMSL SEA Champion Captain & Master of Phase 4 Compounds',
+    },
+    {
+      rank: 9,
+      name: 'LEGIT',
+      realName: 'Subham Sharma',
+      team: 'iQOO SOUL',
+      teamTag: 'SOUL',
+      region: 'India (South Asia)',
+      role: 'Fragger',
+      kd: 3.9,
+      avgDamage: 824,
+      finishesPerMatch: 1.9,
+      rating: 91,
+      signatureWeapon: 'M416 and Beryl M762',
+      notableAccolade: 'BGIS 2026 Grand Finals MVP & Chennai LAN Champion Fragger',
+    },
+    {
+      rank: 10,
+      name: 'Suk',
+      realName: 'Feng Shujie',
+      team: '4AM eSports',
+      teamTag: '4AM',
+      region: 'China (PEL)',
+      role: 'IGL',
+      kd: 3.8,
+      avgDamage: 760,
+      finishesPerMatch: 1.6,
+      rating: 90,
+      signatureWeapon: 'M416 and Kar98k',
+      notableAccolade: 'PMGC World Champion IGL & PEL Veteran Tactical Lead',
+    },
+  ],
+  globalTournaments: [
+    {
+      name: 'PUBG Mobile World Cup 2026 (Esports World Cup)',
+      shortName: 'PMWC 2026',
+      tier: 'S-Tier Global Invitational',
+      prizePool: 'USD 3,000,000 (~INR 25.2 Crore)',
+      location: 'Paris, France',
+      dates: 'August 2026',
+      champion: 'Alpha7 Esports',
+      format: '24 Global Elite Rosters, 18 LAN Finals Matches',
+    },
+    {
+      name: 'PUBG Mobile Global Championship 2026',
+      shortName: 'PMGC 2026',
+      tier: 'S-Tier World Finale',
+      prizePool: 'USD 3,000,000 (~INR 25.2 Crore)',
+      location: 'Global LAN Destination',
+      dates: 'November 2026 to January 2027',
+      champion: 'Upcoming',
+      format: '48 Teams League Stage into 16 Team Grand Finals',
+    },
+    {
+      name: 'PUBG Mobile Global Open',
+      shortName: 'PMGO',
+      tier: 'A-Tier International Open',
+      prizePool: 'USD 500,000 (~INR 4.2 Crore)',
+      location: 'São Paulo & Tokyo',
+      dates: 'Annual Global Open',
+      champion: 'Reject (RC)',
+      format: 'Open Qualifier Pathway into Main Event',
+    },
+    {
+      name: 'PUBG Mobile Super League (PMSL)',
+      shortName: 'PMSL 2026',
+      tier: 'Regional Pro Tier 1',
+      prizePool: 'USD 250,000 (~INR 2.1 Crore per region)',
+      location: 'SEA, Americas, CSA',
+      dates: 'Spring & Fall Splits',
+      champion: 'D\'Xavier / Alpha7',
+      format: 'Multi-week Group Stage, Super Weekends, Finals',
     },
   ],
   indianSquadsGlobal: [

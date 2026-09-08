@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { href: '/zones',       label: 'Zone Timers' },
   { href: '/esports',     label: 'Esports' },
   { href: '/team-stats',  label: 'Team Stats' },
+  { href: '/international', label: 'Global Stats' },
   { href: '/rankings',    label: 'Pro Rankings' },
   { href: '/sensitivity', label: 'Sensitivity' },
 ];
@@ -64,7 +65,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3">
             <div className="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/60 border border-emerald-500/40 text-xs font-mono text-emerald-300 font-semibold shadow-sm">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Patch 3.4 Live Meta</span>
+              <span>Version 4.5 Live (Upcoming 4.6)</span>
             </div>
 
             <button

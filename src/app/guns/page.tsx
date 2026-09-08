@@ -41,10 +41,10 @@ export default function GunsPage() {
       {/* Header */}
       <div className="mb-10">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/15 border border-orange-500/30 text-xs font-mono uppercase tracking-wider text-orange-300 font-bold mb-3">
-          Ballistics Telemetry
+          Weapon Mechanics
         </div>
         <h1 className="text-4xl sm:text-5xl font-black text-white uppercase tracking-tight mb-3">
-          Weapon Arsenal and Recoil Benchmarks
+          Weapon Mechanics and Mastery
         </h1>
         <p className="text-base sm:text-lg text-slate-300 max-w-3xl leading-relaxed">
           Empirical damage coefficients, headshot multipliers, effective engagement distances, and optimal attachment builds.

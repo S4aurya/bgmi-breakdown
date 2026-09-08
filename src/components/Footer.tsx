@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Map, Crosshair, ShieldAlert, Trophy, Zap, Medal, Users } from 'lucide-react';
+import { Map, Crosshair, ShieldAlert, Trophy, Zap, Medal, Users, Globe } from 'lucide-react';
 
 function InstagramIcon({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return (
@@ -13,13 +13,14 @@ function InstagramIcon({ className, style }: { className?: string; style?: React
 }
 
 const QUICK_LINKS = [
-  { href: '/maps',        label: 'Maps and Drop Hotspots',   icon: Map,         color: 'text-emerald-400' },
-  { href: '/guns',        label: 'Weapons and Recoil Lab',   icon: Crosshair,   color: 'text-orange-400' },
-  { href: '/zones',       label: 'Zone Timers and Blue DPS', icon: ShieldAlert, color: 'text-cyan-400' },
-  { href: '/esports',     label: 'Esports and Meta Zone',    icon: Trophy,      color: 'text-amber-400' },
-  { href: '/team-stats',  label: 'Team Stats and Points Calc', icon: Users,     color: 'text-blue-400' },
-  { href: '/rankings',    label: 'Pro Player Rankings',      icon: Medal,       color: 'text-pink-400' },
-  { href: '/sensitivity', label: 'Sensitivity Calibration',  icon: Zap,         color: 'text-purple-400' },
+  { href: '/maps',          label: 'Maps and Drop Hotspots',     icon: Map,         color: 'text-emerald-400' },
+  { href: '/guns',          label: 'Weapon Mechanics & Mastery', icon: Crosshair,   color: 'text-orange-400' },
+  { href: '/zones',         label: 'Zone Timers and Blue DPS',   icon: ShieldAlert, color: 'text-cyan-400' },
+  { href: '/esports',       label: 'Esports and Meta Zone',      icon: Trophy,      color: 'text-amber-400' },
+  { href: '/team-stats',    label: 'Team Stats and Points Calc', icon: Users,       color: 'text-blue-400' },
+  { href: '/international', label: 'International Global Stats', icon: Globe,       color: 'text-indigo-400' },
+  { href: '/rankings',      label: 'Pro Player Rankings',        icon: Medal,       color: 'text-pink-400' },
+  { href: '/sensitivity',   label: 'Sensitivity Calibration',    icon: Zap,         color: 'text-purple-400' },
 ];
 
 export default function Footer() {
@@ -93,7 +94,11 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 shrink-0" />
-                <span>Competitive Maps: 4 Active (Erangel, Miramar, Rondo, Livik)</span>
+                <span>Competitive Maps: 3 Active (Erangel, Miramar, Rondo)</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2 shrink-0" />
+                <span>Version: 4.5 Live (Upcoming 4.6 Midnight Hunters)</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-2 shrink-0" />

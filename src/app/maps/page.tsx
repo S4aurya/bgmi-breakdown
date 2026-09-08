@@ -30,7 +30,7 @@ export default function MapsPage() {
           Competitive Maps & Drop Strategy
         </h1>
         <p className="text-base sm:text-lg text-slate-300 max-w-3xl leading-relaxed">
-          Terrain dimensions, vehicle distribution corridors, loot densities, and initial landing strategies across the 4 active competitive battlegrounds.
+          Terrain dimensions, vehicle distribution corridors, loot densities, and initial landing strategies across the 3 active competitive battlegrounds (Erangel, Miramar, and Rondo).
         </p>
       </div>
 
@@ -42,14 +42,14 @@ export default function MapsPage() {
         <div>
           <div className="flex flex-wrap items-center gap-2.5 mb-1.5">
             <span className="text-sm font-black text-white uppercase tracking-wider">
-              Official Krafton Competitive Map Pool (4 Maps Active)
+              Official Krafton Competitive Map Pool (3 Maps Active)
             </span>
             <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold">
-              Erangel &middot; Miramar &middot; Rondo &middot; Livik
+              Erangel &middot; Miramar &middot; Rondo
             </span>
           </div>
           <p className="text-sm text-slate-300 leading-relaxed font-normal">
-            Per the official Krafton India Esports Rulebook, <strong>Sanhok and Vikendi are officially retired from tournament play</strong> due to circle pacing, high third-party density, and compound distribution variance. Tier 1 competitions (BGIS, BMPS, PMWC) feature only the 4 standardized maps below.
+            Per the official Krafton India Esports Rulebook, <strong>Livik, Sanhok, and Vikendi are excluded from competitive tournament play</strong>. Livik serves exclusively as an arcade/casual 15-minute quick-match map, while Sanhok and Vikendi are retired from competitive rulebooks. Tier 1 competitions (BGIS, BMPS, PMWC) feature only the 3 standardized maps below.
           </p>
         </div>
       </div>
@@ -166,14 +166,14 @@ export default function MapsPage() {
             Archival Intel
           </div>
           <h2 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight">
-            Retired Competitive Maps (Sanhok & Vikendi)
+            Excluded & Retired Competitive Maps (Livik, Sanhok, Vikendi)
           </h2>
           <p className="text-sm sm:text-base text-slate-400 max-w-2xl mt-1">
-            Battlegrounds previously included in tournaments but officially removed by Krafton India Esports from active Tier 1 rotation.
+            Battlegrounds excluded or retired by Krafton India Esports from active Tier 1 competitive tournament rotation.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {RETIRED_COMPETITIVE_MAPS.map(m => (
             <div key={m.id} className="p-6 rounded-2xl border border-slate-800 bg-[#0e1424] opacity-80 hover:opacity-100 transition-opacity">
               <div className="flex items-center justify-between gap-3 mb-3">
