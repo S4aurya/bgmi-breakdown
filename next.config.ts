@@ -1,5 +1,13 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {};
+const isGithubActions = process.env.GITHUB_ACTIONS || false;
+
+const nextConfig: NextConfig = {
+  output: 'export',
+  basePath: isGithubActions ? '/bgmi-breakdown' : '',
+  images: {
+    unoptimized: true,
+  },
+};
 
 export default nextConfig;
