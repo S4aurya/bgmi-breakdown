@@ -27,7 +27,7 @@ export default function EsportsPage() {
           Tournament Tracking & Pro Meta
         </h1>
         <p className="text-base sm:text-lg text-slate-300 max-w-3xl leading-relaxed">
-          Official Krafton India Esports circuits (BGIS 2026, BMPS 2026), international world championships (PMWC Paris, PMGC), team dossiers, and validated tactical weapon loadouts.
+          Completed BGIS 2026 (Chennai) and BMPS 2026 (Jaipur) dossiers, live BMSD 2026 standings, international world championships (PMWC Paris, PMGC Istanbul Nov-Dec 2026), team rosters, and validated tactical weapon loadouts.
         </p>
       </div>
 

@@ -47,7 +47,7 @@ export default function GunsPage() {
           Weapon Mechanics and Mastery
         </h1>
         <p className="text-base sm:text-lg text-slate-300 max-w-3xl leading-relaxed">
-          Empirical damage coefficients, headshot multipliers, effective engagement distances, and optimal attachment builds.
+          Empirical damage coefficients, headshot multipliers, effective engagement distances, and optimal attachment builds calibrated for Version 4.6.
         </p>
       </div>
 
