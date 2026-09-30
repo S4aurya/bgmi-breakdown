@@ -24,7 +24,6 @@ const SECTIONS = [
     detail: 'PointCalc Alternative: 100% Free',
     description: 'Calculate multi-match points tables, BGIS 10-point vs Classic 15-point rules, individual MVP fraggers, and custom slot lists with one-click export.',
     badge: '100% Free Tool',
-    color: 'blue',
     iconBg: 'bg-blue-500/15 border-blue-500/30 text-blue-400',
     badgeStyle: 'bg-blue-950/60 text-blue-300 border-blue-500/30',
     hoverBorder: 'hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-950/40',
@@ -36,7 +35,6 @@ const SECTIONS = [
     detail: 'Erangel, Miramar, Rondo',
     description: 'Standard 3-map competitive rotation. Hot-drop threat tiers, high-probability vehicle spawn corridors, and compound fortification points (Livik, Sanhok, Vikendi retired).',
     badge: '3 Competitive Maps',
-    color: 'emerald',
     iconBg: 'bg-emerald-500/15 border-emerald-500/30 text-emerald-400',
     badgeStyle: 'bg-emerald-950/60 text-emerald-300 border-emerald-500/30',
     hoverBorder: 'hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-950/40',
@@ -48,7 +46,6 @@ const SECTIONS = [
     detail: 'Full Attachment & Damage Benchmark',
     description: 'Empirical damage values, headshot multipliers, bullet velocity ratings, and recoil pull-down builds calibrated for Version 4.6 tournament rifles.',
     badge: '8 Primary Weapons',
-    color: 'orange',
     iconBg: 'bg-orange-500/15 border-orange-500/30 text-orange-400',
     badgeStyle: 'bg-orange-950/60 text-orange-300 border-orange-500/30',
     hoverBorder: 'hover:border-orange-500/50 hover:shadow-lg hover:shadow-orange-950/40',
@@ -60,7 +57,6 @@ const SECTIONS = [
     detail: 'Phases 1 Through 8 Metrics',
     description: 'Exact shrink countdowns, blue boundary damage per second, and critical boundary rotation safety thresholds.',
     badge: '8 Circle Phases',
-    color: 'cyan',
     iconBg: 'bg-cyan-500/15 border-cyan-500/30 text-cyan-400',
     badgeStyle: 'bg-cyan-950/60 text-cyan-300 border-cyan-500/30',
     hoverBorder: 'hover:border-cyan-500/50 hover:shadow-lg hover:shadow-cyan-950/40',
@@ -72,7 +68,6 @@ const SECTIONS = [
     detail: 'BGIS 2026, BMPS 2026, BMSD 2026, PMGC Istanbul',
     description: 'Completed BGIS/BMPS 2026 brackets, live BMSD 2026 standings, upcoming PMGC Istanbul roster seeds, and verified pro meta loadout strategies.',
     badge: 'Official Krafton Circuit',
-    color: 'amber',
     iconBg: 'bg-amber-500/15 border-amber-500/30 text-amber-400',
     badgeStyle: 'bg-amber-950/60 text-amber-300 border-amber-500/30',
     hoverBorder: 'hover:border-amber-500/50 hover:shadow-lg hover:shadow-amber-950/40',
@@ -84,7 +79,6 @@ const SECTIONS = [
     detail: 'Top 10 Indian Professional Athletes',
     description: 'Verified tournament KD ratings, average damage outputs, round finish averages, and signature loadouts.',
     badge: 'Top 10 Verified',
-    color: 'pink',
     iconBg: 'bg-pink-500/15 border-pink-500/30 text-pink-400',
     badgeStyle: 'bg-pink-950/60 text-pink-300 border-pink-500/30',
     hoverBorder: 'hover:border-pink-500/50 hover:shadow-lg hover:shadow-pink-950/40',
@@ -94,9 +88,8 @@ const SECTIONS = [
     icon: Zap,
     title: 'Sensitivity Calibration',
     detail: 'Claw & Gyroscope Presets',
-    description: 'Pro configurations from Manya and Jonathan, calibrated camera panning angles, and ADS drag ratios.',
+    description: 'Pro configurations from Manya (GodLike) and Jonathan (TAG), calibrated camera panning angles, and ADS drag ratios.',
     badge: '3 Device Profiles',
-    color: 'purple',
     iconBg: 'bg-purple-500/15 border-purple-500/30 text-purple-400',
     badgeStyle: 'bg-purple-950/60 text-purple-300 border-purple-500/30',
     hoverBorder: 'hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-950/40',
@@ -108,18 +101,24 @@ const SECTIONS = [
     detail: 'Worldwide Team & Player Rankings',
     description: 'Official global rankings from PUBG Mobile esports: World Top 10 team power index, elite international players, PMGC and PMWC world championships.',
     badge: 'Global Circuit',
-    color: 'purple',
     iconBg: 'bg-indigo-500/15 border-indigo-500/30 text-indigo-400',
     badgeStyle: 'bg-indigo-950/60 text-indigo-300 border-indigo-500/30',
     hoverBorder: 'hover:border-indigo-500/50 hover:shadow-lg hover:shadow-indigo-950/40',
   },
 ];
 
+const LIVE_STATS = [
+  { label: 'KIE Rank #1',        value: 'Jonathan',  sub: '137 pts · Team Apex Gaming', color: 'text-orange-400' },
+  { label: 'BGIS 2026 Champion', value: 'iQOO SOUL', sub: '173 pts · Chennai LAN',       color: 'text-emerald-400' },
+  { label: 'BMPS 2026 Champion', value: 'GodLike',   sub: '162 pts · Jaipur LAN',        color: 'text-amber-400' },
+  { label: 'Active Tournament',  value: 'BMSD 2026', sub: 'Sep 22 – Oct 18 · INR 1 Cr', color: 'text-cyan-400' },
+] as const;
+
 export default function HomePage() {
   return (
     <div className="pb-24">
 
-      {/* ── Operational Ticker (Enhanced text size & rich colored tags) ── */}
+      {/* ── Operational Ticker ── */}
       <div className="bg-[#0e1422] border-b border-white/10 py-3 overflow-hidden" aria-label="Competitive Bulletin">
         <div className="ticker-track flex gap-14 w-max">
           {[...TICKER_ITEMS, ...TICKER_ITEMS].map((item, i) => (
@@ -133,55 +132,111 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* ── Hero Briefing (Large fonts, high contrast, vibrant accents) ── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
-        <div className="max-w-4xl">
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-orange-500/15 border border-orange-500/30 text-xs sm:text-sm font-mono text-orange-300 font-bold uppercase tracking-wider mb-6 shadow-sm">
-            <span className="w-2 h-2 rounded-full bg-orange-500" />
-            Competitive Telemetry: Season Meta 2026 (v4.6)
-          </div>
+      {/* ── Hero Section with Full BGMI Visual FX ── */}
+      <section className="hero-section bg-[#080c14]">
 
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white uppercase leading-[1.08] mb-6">
-            Battlegrounds Mobile India{' '}
-            <span className="bg-gradient-to-r from-orange-400 via-amber-300 to-orange-500 bg-clip-text text-transparent">
-              Tactical Intel
-            </span>
-          </h1>
+        {/* Tactical Grid */}
+        <div className="hero-grid" />
 
-          <p className="text-lg sm:text-2xl text-slate-300 leading-relaxed mb-10 max-w-3xl font-normal">
-            Verified weapon recoil benchmarks, competitive map drop zones, blue zone DPS timing thresholds, pro tournament analytics, and a 100% free esports Points Table Calculator.
-          </p>
+        {/* Floating Smoke Orbs */}
+        <div className="smoke-orb smoke-orb-1" />
+        <div className="smoke-orb smoke-orb-2" />
+        <div className="smoke-orb smoke-orb-3" />
 
-          <div className="flex flex-wrap items-center gap-4">
-            <Link
-              href="/team-stats"
-              className="px-7 py-4 rounded-xl bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white text-base font-extrabold tracking-wide transition-all shadow-lg shadow-blue-500/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
-            >
-              Points Table & Team Stats (Free)
-            </Link>
-            <Link
-              href="/guns"
-              className="px-7 py-4 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white text-base font-extrabold tracking-wide transition-all shadow-lg shadow-orange-500/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400"
-            >
-              Inspect Weapon Arsenal
-            </Link>
-            <Link
-              href="/zones"
-              className="px-7 py-4 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-white text-base font-extrabold tracking-wide border border-slate-700 hover:border-slate-600 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
-            >
-              View Zone Timings
-            </Link>
-            <Link
-              href="/rankings"
-              className="px-6 py-4 rounded-xl bg-pink-950/40 hover:bg-pink-900/50 text-pink-300 border border-pink-500/30 hover:border-pink-500/60 text-base font-bold transition-all"
-            >
-              Top 10 Pro Rankings
-            </Link>
+        {/* Scanlines */}
+        <div className="scanlines" />
+
+        {/* Blue Zone Pulse Rings */}
+        <div className="zone-ring zone-ring-1" />
+        <div className="zone-ring zone-ring-2" />
+        <div className="zone-ring zone-ring-3" />
+
+        {/* Airdrop Beacon */}
+        <div className="airdrop-beacon" />
+
+        {/* Bullet Tracers */}
+        <div className="tracer tracer-1" />
+        <div className="tracer tracer-2" />
+        <div className="tracer tracer-3" />
+
+        {/* Parachute Drops */}
+        <div className="para-drop para-1" aria-hidden="true">&#9650;</div>
+        <div className="para-drop para-2" aria-hidden="true">&#9650;</div>
+        <div className="para-drop para-3" aria-hidden="true">&#9650;</div>
+        <div className="para-drop para-4" aria-hidden="true">&#9650;</div>
+        <div className="para-drop para-5" aria-hidden="true">&#9650;</div>
+
+        {/* Radar + Compass HUD */}
+        <div className="hud-compass" aria-hidden="true" />
+        <div className="radar-sweep" aria-hidden="true" />
+
+        {/* Hero Content */}
+        <div className="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
+          <div className="max-w-4xl">
+
+            {/* Live Badge */}
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-orange-500/15 border border-orange-500/30 text-xs sm:text-sm font-mono text-orange-300 font-bold uppercase tracking-wider mb-6 shadow-sm">
+              <span className="live-dot w-2 h-2 rounded-full bg-orange-500" />
+              Competitive Telemetry: Season Meta 2026 (v4.6)
+            </div>
+
+            {/* Title */}
+            <h1 className="hero-title-glow text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white uppercase leading-[1.08] mb-6">
+              Battlegrounds Mobile India{' '}
+              <span className="bg-gradient-to-r from-orange-400 via-amber-300 to-orange-500 bg-clip-text text-transparent">
+                Tactical Intel
+              </span>
+            </h1>
+
+            {/* Subtitle */}
+            <p className="text-lg sm:text-2xl text-slate-300 leading-relaxed mb-10 max-w-3xl font-normal">
+              Verified weapon recoil benchmarks, competitive map drop zones, blue zone DPS timing thresholds, pro tournament analytics, and a 100% free esports Points Table Calculator.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap items-center gap-4 mb-12">
+              <Link
+                href="/team-stats"
+                className="px-7 py-4 rounded-xl bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white text-base font-extrabold tracking-wide transition-all shadow-lg shadow-blue-500/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+              >
+                Points Table &amp; Team Stats (Free)
+              </Link>
+              <Link
+                href="/guns"
+                className="px-7 py-4 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white text-base font-extrabold tracking-wide transition-all shadow-lg shadow-orange-500/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400"
+              >
+                Inspect Weapon Arsenal
+              </Link>
+              <Link
+                href="/zones"
+                className="px-7 py-4 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-white text-base font-extrabold tracking-wide border border-slate-700 hover:border-slate-600 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
+              >
+                View Zone Timings
+              </Link>
+              <Link
+                href="/rankings"
+                className="px-6 py-4 rounded-xl bg-pink-950/40 hover:bg-pink-900/50 text-pink-300 border border-pink-500/30 hover:border-pink-500/60 text-base font-bold transition-all"
+              >
+                Top 10 Pro Rankings
+              </Link>
+            </div>
+
+            {/* Live Intel Stats Bar */}
+            <div className="flex flex-wrap gap-6 border-t border-white/[0.08] pt-8">
+              {LIVE_STATS.map((s) => (
+                <div key={s.label} className="stat-glow flex flex-col gap-0.5 min-w-[130px]">
+                  <div className="text-[10px] font-mono font-bold uppercase tracking-widest text-slate-500">{s.label}</div>
+                  <div className={`text-sm font-black ${s.color}`}>{s.value}</div>
+                  <div className="text-[11px] font-mono text-slate-400">{s.sub}</div>
+                </div>
+              ))}
+            </div>
+
           </div>
         </div>
       </section>
 
-      {/* ── Structured Tactical Index (7 Modules) ── */}
+      {/* ── Tactical Modules Grid ── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 border-t border-white/10">
         <div className="flex flex-col sm:flex-row sm:items-baseline justify-between mb-10 gap-2">
           <div>
@@ -239,7 +294,7 @@ export default function HomePage() {
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/40 text-xs font-mono uppercase tracking-wider text-blue-300 font-bold mb-3">
                 PointCalc Alternative: 100% Free
               </div>
-              <h3 className="text-2xl sm:text-3xl font-black text-white">Full Esports Points Table & Standings Calculator</h3>
+              <h3 className="text-2xl sm:text-3xl font-black text-white">Full Esports Points Table &amp; Standings Calculator</h3>
               <p className="text-base text-slate-300 mt-2 max-w-2xl leading-relaxed">
                 Automated multi-match calculation with official BGIS 10-point and PMCO 15-point rules, individual MVP tracker, and slot list manager. Export standings for WhatsApp or Discord in one click. Zero subscriptions or paywalls.
               </p>
@@ -254,7 +309,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Operational Tournament Banner with Rich Gold/Amber Palette ── */}
+      {/* ── Tournament Banner ── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
         <div className="rounded-2xl border border-amber-500/30 bg-gradient-to-r from-amber-950/40 via-[#141b2c] to-orange-950/30 p-8 sm:p-10 shadow-lg shadow-amber-950/20">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
@@ -262,7 +317,7 @@ export default function HomePage() {
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-xs font-mono uppercase tracking-wider text-amber-300 font-bold mb-3">
                 Official Krafton Tournament Telemetry
               </div>
-              <h3 className="text-2xl sm:text-3xl font-black text-white">BGIS, BMPS 2026 Dossier & PMGC 2026 Road</h3>
+              <h3 className="text-2xl sm:text-3xl font-black text-white">BGIS, BMPS 2026 Dossier &amp; PMGC 2026 Road</h3>
               <p className="text-base text-slate-300 mt-2 max-w-2xl leading-relaxed">
                 iQOO SOUL captured the BGIS 2026 title in Chennai (173 pts, INR 1 Crore) while GodLike secured the BMPS 2026 trophy in Jaipur (162 pts) to represent India at PMWC Paris. BMSD 2026 is now live (Sep 22) with its champion earning a direct PMGC 2026 slot in Istanbul (Nov-Dec 2026, USD 3M). Track brackets, scores, and active meta shifts.
               </p>
