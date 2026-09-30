@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 :root {
-  --bg-main: #0b0f19;
-  --bg-surface: #131b2e;
-  --bg-surface-elevated: #1a243d;
-  --border-subtle: rgba(255, 255, 255, 0.12);
+  --bg-main: #080c14;
+  --bg-surface: #0f1624;
+  --bg-surface-elevated: #151f35;
+  --border-subtle: rgba(255, 255, 255, 0.10);
   --border-focus: #f97316;
   --text-primary: #f8fafc;
   --text-secondary: #cbd5e1;
@@ -19,9 +19,6 @@ html {
 
 body {
   background-color: var(--bg-main);
-  background-image: 
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(249, 115, 22, 0.15), transparent),
-    radial-gradient(ellipse 60% 40% at 80% 60%, rgba(14, 165, 233, 0.08), transparent);
   color: var(--text-primary);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   overflow-x: hidden;
@@ -37,365 +34,614 @@ select:focus-visible {
 }
 
 /* ── Custom Scrollbars ── */
-::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg-main);
-}
-::-webkit-scrollbar-thumb {
-  background: #2b3652;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-amber);
-}
+::-webkit-scrollbar { width: 7px; height: 7px; }
+::-webkit-scrollbar-track { background: var(--bg-main); }
+::-webkit-scrollbar-thumb { background: #2b3652; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-amber); }
 
 /* ── Ticker Animation ── */
 @keyframes ticker {
-  0% { transform: translateX(0); }
+  0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-.ticker-track {
-  animation: ticker 40s linear infinite;
-}
-.ticker-track:hover {
-  animation-play-state: paused;
-}
+.ticker-track { animation: ticker 40s linear infinite; }
+.ticker-track:hover { animation-play-state: paused; }
 
 /* ── Stat Bar Transitions ── */
-.stat-bar-fill {
-  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+.stat-bar-fill { transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+
+/* ════════════════════════════════════════
+   BGMI HERO SECTION — FULL VISUAL SYSTEM
+   ════════════════════════════════════════ */
+
+/* Hero wrapper */
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(ellipse 120% 60% at 70% -10%, rgba(6,182,212,0.22) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 50% at 20% 100%, rgba(249,115,22,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 90% 80%, rgba(124,58,237,0.12) 0%, transparent 50%),
+    linear-gradient(170deg, #050912 0%, #090e1c 40%, #0b1222 70%, #060a14 100%);
 }
 
-/* ── BGMI Hero Background Canvas ── */
+/* Sky atmosphere layer — top glow */
+.hero-sky {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 100% 40% at 50% 0%, rgba(6,182,212,0.14) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 30% at 80% 10%, rgba(249,115,22,0.10) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Particle canvas (JS-driven) */
 .hero-canvas {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 0;
+  z-index: 2;
 }
 
-/* ── Hero Section Wrapper ── */
-.hero-section {
-  position: relative;
-  overflow: hidden;
-}
-
-/* ── Tactical Grid Overlay ── */
+/* ── TACTICAL GRID — Bright, visible ── */
 .hero-grid {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(249, 115, 22, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(249, 115, 22, 0.04) 1px, transparent 1px);
-  background-size: 60px 60px;
-  mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, black 30%, transparent 100%);
+    linear-gradient(rgba(6, 182, 212, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(6, 182, 212, 0.07) 1px, transparent 1px),
+    linear-gradient(rgba(249, 115, 22, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(249, 115, 22, 0.03) 1px, transparent 1px);
+  background-size: 80px 80px, 80px 80px, 20px 20px, 20px 20px;
   pointer-events: none;
   z-index: 1;
-  animation: grid-drift 20s ease-in-out infinite alternate;
+  animation: grid-drift 25s ease-in-out infinite alternate;
 }
 
 @keyframes grid-drift {
   0%   { transform: translateY(0px) translateX(0px); }
-  100% { transform: translateY(-12px) translateX(6px); }
+  100% { transform: translateY(-20px) translateX(10px); }
 }
 
-/* ── Blue Zone Pulse Rings ── */
+/* ── BLUE ZONE RINGS — Large, glowing, very visible ── */
 .zone-ring {
   position: absolute;
   border-radius: 50%;
-  border: 1px solid rgba(6, 182, 212, 0.25);
   pointer-events: none;
-  z-index: 1;
-  animation: zone-pulse 4s ease-out infinite;
+  z-index: 3;
+  animation: zone-pulse 5s ease-out infinite;
+  box-shadow: 0 0 30px 2px rgba(6,182,212,0.15) inset;
 }
 .zone-ring-1 {
-  width: 340px; height: 340px;
-  right: -60px; top: -80px;
+  width: 500px; height: 500px;
+  right: -120px; top: -140px;
+  border: 2px solid rgba(6, 182, 212, 0.55);
+  box-shadow: 0 0 40px 6px rgba(6,182,212,0.20), inset 0 0 40px 4px rgba(6,182,212,0.10);
   animation-delay: 0s;
 }
 .zone-ring-2 {
-  width: 520px; height: 520px;
-  right: -150px; top: -170px;
-  animation-delay: 1.2s;
-  border-color: rgba(6, 182, 212, 0.14);
+  width: 750px; height: 750px;
+  right: -200px; top: -240px;
+  border: 1.5px solid rgba(6, 182, 212, 0.35);
+  box-shadow: 0 0 25px 4px rgba(6,182,212,0.12);
+  animation-delay: 1.6s;
 }
 .zone-ring-3 {
-  width: 720px; height: 720px;
-  right: -250px; top: -270px;
-  animation-delay: 2.4s;
-  border-color: rgba(6, 182, 212, 0.07);
+  width: 1050px; height: 1050px;
+  right: -320px; top: -380px;
+  border: 1px solid rgba(6, 182, 212, 0.18);
+  animation-delay: 3.2s;
 }
 
 @keyframes zone-pulse {
-  0%   { transform: scale(0.88); opacity: 0; }
-  20%  { opacity: 1; }
-  80%  { opacity: 0.6; }
-  100% { transform: scale(1.08); opacity: 0; }
+  0%   { transform: scale(0.85); opacity: 0; }
+  15%  { opacity: 1; }
+  75%  { opacity: 0.8; }
+  100% { transform: scale(1.06); opacity: 0; }
 }
 
-/* ── Airdrop Crate Beacon ── */
-.airdrop-beacon {
+/* Zone fill glow (static decoration) */
+.zone-glow {
   position: absolute;
-  right: 10%;
-  top: 18%;
-  width: 3px;
-  height: 3px;
+  right: -280px;
+  top: -300px;
+  width: 800px;
+  height: 800px;
   border-radius: 50%;
-  background: rgba(249, 115, 22, 0.9);
-  box-shadow: 0 0 12px 4px rgba(249, 115, 22, 0.5);
-  z-index: 2;
-  animation: beacon-blink 1.6s ease-in-out infinite;
+  background: radial-gradient(circle, rgba(6,182,212,0.06) 0%, rgba(6,182,212,0.03) 40%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+  animation: zone-breathe 8s ease-in-out infinite alternate;
 }
-.airdrop-beacon::before {
+
+@keyframes zone-breathe {
+  0%   { transform: scale(0.95); opacity: 0.6; }
+  100% { transform: scale(1.05); opacity: 1; }
+}
+
+/* ── PLANE FLYBY ── */
+.plane {
+  position: absolute;
+  top: 12%;
+  left: -80px;
+  width: 56px;
+  height: 16px;
+  pointer-events: none;
+  z-index: 5;
+  animation: plane-fly 18s linear infinite;
+  filter: drop-shadow(0 0 8px rgba(249,115,22,0.8));
+}
+.plane::before {
+  content: '✈';
+  font-size: 28px;
+  color: rgba(249,115,22,0.85);
+  display: block;
+}
+.plane-trail {
+  position: absolute;
+  top: calc(12% + 10px);
+  left: -200px;
+  height: 2px;
+  width: 180px;
+  background: linear-gradient(90deg, transparent, rgba(249,115,22,0.6), rgba(255,255,255,0.3), transparent);
+  pointer-events: none;
+  z-index: 4;
+  animation: plane-fly 18s linear infinite;
+  filter: blur(1px);
+}
+
+@keyframes plane-fly {
+  0%   { transform: translateX(0); opacity: 0; }
+  3%   { opacity: 1; }
+  92%  { opacity: 0.9; }
+  100% { transform: translateX(110vw); opacity: 0; }
+}
+
+/* ── AIRDROP SUPPLY CRATE ── */
+.supply-drop {
+  position: absolute;
+  right: 14%;
+  top: -60px;
+  z-index: 5;
+  animation: supply-fall 12s ease-in infinite;
+  animation-delay: 4s;
+  pointer-events: none;
+}
+.supply-drop::before {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 18px solid transparent;
+  border-right: 18px solid transparent;
+  border-bottom: 28px solid rgba(6,182,212,0.7);
+  margin: 0 auto 4px;
+  filter: drop-shadow(0 0 8px rgba(6,182,212,0.8));
+}
+.supply-drop::after {
+  content: '';
+  display: block;
+  width: 18px;
+  height: 18px;
+  background: linear-gradient(135deg, rgba(249,115,22,0.9), rgba(251,191,36,0.9));
+  margin: 0 auto;
+  border-radius: 3px;
+  box-shadow: 0 0 14px 4px rgba(249,115,22,0.6);
+}
+.supply-drop-line {
+  position: absolute;
+  right: 14.8%;
+  top: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, rgba(249,115,22,0.5));
+  height: 0;
+  z-index: 4;
+  animation: drop-line 12s ease-in infinite;
+  animation-delay: 4s;
+}
+
+@keyframes supply-fall {
+  0%   { transform: translateY(0); opacity: 0; }
+  5%   { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: translateY(110vh); opacity: 0; }
+}
+@keyframes drop-line {
+  0%   { height: 0; opacity: 0; }
+  5%   { opacity: 0.6; }
+  100% { height: 110vh; opacity: 0; }
+}
+
+/* ── BULLET TRACER LINES — Thick, glowing, bright ── */
+.tracer {
+  position: absolute;
+  pointer-events: none;
+  z-index: 4;
+  border-radius: 4px;
+  animation: tracer-fly linear infinite;
+  opacity: 0;
+}
+.tracer-1 {
+  width: 220px; height: 3px;
+  top: 32%;
+  left: -240px;
+  background: linear-gradient(90deg, transparent, rgba(249,115,22,1), rgba(255,200,80,0.8), transparent);
+  box-shadow: 0 0 12px 3px rgba(249,115,22,0.6);
+  animation-duration: 2.4s;
+  animation-delay: 1s;
+}
+.tracer-2 {
+  width: 160px; height: 2px;
+  top: 58%;
+  left: -180px;
+  background: linear-gradient(90deg, transparent, rgba(6,182,212,0.95), rgba(165,243,252,0.7), transparent);
+  box-shadow: 0 0 10px 3px rgba(6,182,212,0.5);
+  animation-duration: 1.9s;
+  animation-delay: 3.5s;
+}
+.tracer-3 {
+  width: 280px; height: 3px;
+  top: 45%;
+  right: -300px;
+  background: linear-gradient(270deg, transparent, rgba(249,115,22,0.9), rgba(251,191,36,0.6), transparent);
+  box-shadow: 0 0 12px 3px rgba(249,115,22,0.5);
+  animation-duration: 2.8s;
+  animation-delay: 0.5s;
+  animation-direction: reverse;
+}
+.tracer-4 {
+  width: 130px; height: 2px;
+  top: 72%;
+  left: -150px;
+  background: linear-gradient(90deg, transparent, rgba(168,85,247,0.9), rgba(216,180,254,0.6), transparent);
+  box-shadow: 0 0 10px 3px rgba(168,85,247,0.4);
+  animation-duration: 2.1s;
+  animation-delay: 5s;
+}
+.tracer-5 {
+  width: 200px; height: 2px;
+  top: 20%;
+  right: -220px;
+  background: linear-gradient(270deg, transparent, rgba(6,182,212,0.8), rgba(165,243,252,0.5), transparent);
+  box-shadow: 0 0 10px 3px rgba(6,182,212,0.4);
+  animation-duration: 2.2s;
+  animation-delay: 2s;
+  animation-direction: reverse;
+}
+
+@keyframes tracer-fly {
+  0%   { transform: translateX(0);    opacity: 0; }
+  4%   { opacity: 1; }
+  88%  { opacity: 1; }
+  100% { transform: translateX(120vw); opacity: 0; }
+}
+
+/* ── LARGE PARACHUTE DROPS — Visible, real parachute shape ── */
+.chute {
+  position: absolute;
+  top: -120px;
+  pointer-events: none;
+  z-index: 4;
+  animation: chute-fall linear infinite;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.chute-canopy {
+  width: 40px;
+  height: 22px;
+  border-radius: 50% 50% 0 0;
+  border: 2.5px solid rgba(249,115,22,0.75);
+  border-bottom: none;
+  box-shadow: 0 -4px 16px 2px rgba(249,115,22,0.4), inset 0 -4px 12px rgba(249,115,22,0.15);
+  position: relative;
+}
+.chute-canopy::before {
   content: '';
   position: absolute;
-  inset: -8px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  height: 70%;
   border-radius: 50%;
-  border: 1px solid rgba(249, 115, 22, 0.4);
-  animation: beacon-ring 1.6s ease-out infinite;
+  background: rgba(249,115,22,0.12);
 }
-.airdrop-beacon::after {
-  content: '';
-  position: absolute;
-  inset: -18px;
-  border-radius: 50%;
-  border: 1px solid rgba(249, 115, 22, 0.15);
-  animation: beacon-ring 1.6s ease-out infinite 0.4s;
+.chute-lines {
+  width: 14px;
+  height: 18px;
+  border-left: 1px solid rgba(249,115,22,0.5);
+  border-right: 1px solid rgba(249,115,22,0.5);
+  clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);
+}
+.chute-crate {
+  width: 12px;
+  height: 10px;
+  background: linear-gradient(135deg, rgba(249,115,22,0.85), rgba(251,191,36,0.7));
+  border-radius: 2px;
+  box-shadow: 0 0 8px 3px rgba(249,115,22,0.5);
+}
+.chute-1 { left: 8%;  animation-duration: 14s; animation-delay: 0s; }
+.chute-2 { left: 25%; animation-duration: 18s; animation-delay: 5s;  transform: scale(0.7); }
+.chute-3 { left: 58%; animation-duration: 16s; animation-delay: 9s;  }
+.chute-4 { left: 78%; animation-duration: 20s; animation-delay: 2s;  transform: scale(0.8); }
+.chute-2 .chute-canopy { border-color: rgba(6,182,212,0.7); box-shadow: 0 -4px 16px 2px rgba(6,182,212,0.4); }
+.chute-2 .chute-lines  { border-color: rgba(6,182,212,0.5); }
+.chute-2 .chute-crate  { background: linear-gradient(135deg, rgba(6,182,212,0.85), rgba(165,243,252,0.7)); box-shadow: 0 0 8px 3px rgba(6,182,212,0.5); }
+
+@keyframes chute-fall {
+  0%   { transform: translateY(0) rotate(-3deg); opacity: 0; }
+  6%   { opacity: 1; }
+  88%  { opacity: 0.9; }
+  100% { transform: translateY(130vh) rotate(4deg); opacity: 0; }
 }
 
-@keyframes beacon-blink {
-  0%, 100% { opacity: 1; box-shadow: 0 0 12px 4px rgba(249,115,22,0.5); }
-  50%       { opacity: 0.6; box-shadow: 0 0 20px 8px rgba(249,115,22,0.3); }
-}
-@keyframes beacon-ring {
-  0%   { transform: scale(0.8); opacity: 0.8; }
-  100% { transform: scale(2.2); opacity: 0; }
-}
-
-/* ── Floating Smoke Orbs ── */
+/* ── SMOKE GRENADES — Large glowing orbs ── */
 .smoke-orb {
   position: absolute;
   border-radius: 50%;
   pointer-events: none;
   z-index: 1;
-  filter: blur(40px);
-  animation: smoke-float linear infinite;
+  filter: blur(60px);
+  animation: smoke-float ease-in-out infinite alternate;
 }
 .smoke-orb-1 {
-  width: 280px; height: 280px;
-  left: -80px; bottom: -60px;
-  background: radial-gradient(circle, rgba(6, 182, 212, 0.08) 0%, transparent 70%);
-  animation-duration: 18s;
-  animation-delay: 0s;
+  width: 500px; height: 400px;
+  left: -120px; bottom: -100px;
+  background: radial-gradient(circle, rgba(6,182,212,0.18) 0%, rgba(6,182,212,0.08) 50%, transparent 75%);
+  animation-duration: 12s;
 }
 .smoke-orb-2 {
-  width: 200px; height: 200px;
-  right: 5%; top: 30%;
-  background: radial-gradient(circle, rgba(249, 115, 22, 0.07) 0%, transparent 70%);
-  animation-duration: 22s;
-  animation-delay: -7s;
+  width: 380px; height: 380px;
+  right: 0; top: 20%;
+  background: radial-gradient(circle, rgba(249,115,22,0.16) 0%, rgba(249,115,22,0.07) 50%, transparent 75%);
+  animation-duration: 15s;
+  animation-delay: -6s;
 }
 .smoke-orb-3 {
-  width: 160px; height: 160px;
-  left: 40%; bottom: 10%;
-  background: radial-gradient(circle, rgba(168, 85, 247, 0.06) 0%, transparent 70%);
-  animation-duration: 26s;
-  animation-delay: -12s;
+  width: 300px; height: 300px;
+  left: 35%; bottom: 5%;
+  background: radial-gradient(circle, rgba(168,85,247,0.14) 0%, rgba(168,85,247,0.06) 50%, transparent 75%);
+  animation-duration: 18s;
+  animation-delay: -10s;
+}
+.smoke-orb-4 {
+  width: 260px; height: 260px;
+  left: 60%; top: 0;
+  background: radial-gradient(circle, rgba(6,182,212,0.12) 0%, transparent 70%);
+  animation-duration: 20s;
+  animation-delay: -4s;
 }
 
 @keyframes smoke-float {
-  0%   { transform: translateY(0px) translateX(0px) scale(1); opacity: 0.5; }
-  33%  { transform: translateY(-30px) translateX(15px) scale(1.1); opacity: 0.9; }
-  66%  { transform: translateY(-15px) translateX(-10px) scale(0.95); opacity: 0.7; }
-  100% { transform: translateY(0px) translateX(0px) scale(1); opacity: 0.5; }
+  0%   { transform: translateY(0) translateX(0) scale(1); }
+  100% { transform: translateY(-40px) translateX(20px) scale(1.12); }
 }
 
-/* ── Scanline Overlay ── */
+/* ── TERRAIN SILHOUETTE (bottom) ── */
+.terrain {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+  background:
+    linear-gradient(to top, rgba(6,182,212,0.07) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 3;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 140'%3E%3Cpath fill='black' d='M0,140 L0,90 Q80,60 160,80 Q220,95 280,70 Q340,45 400,65 Q460,85 520,55 Q580,25 640,50 Q700,75 760,45 Q820,15 880,40 Q940,65 1000,38 Q1060,11 1120,35 Q1180,59 1240,42 Q1300,25 1360,55 L1440,40 L1440,140 Z'/%3E%3C/svg%3E");
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+}
+.terrain-glow {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to top, rgba(249,115,22,0.06) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ── SCANLINES ── */
 .scanlines {
   position: absolute;
   inset: 0;
   background: repeating-linear-gradient(
     0deg,
     transparent,
-    transparent 3px,
-    rgba(0, 0, 0, 0.03) 3px,
-    rgba(0, 0, 0, 0.03) 4px
+    transparent 2px,
+    rgba(0, 0, 0, 0.06) 2px,
+    rgba(0, 0, 0, 0.06) 3px
   );
   pointer-events: none;
-  z-index: 2;
+  z-index: 6;
+  opacity: 0.5;
 }
 
-/* ── Bullet Tracer Lines ── */
-.tracer {
+/* ── AIRDROP BEACON ── */
+.airdrop-beacon {
   position: absolute;
-  height: 1px;
-  pointer-events: none;
-  z-index: 2;
-  border-radius: 1px;
-  animation: tracer-fly linear infinite;
-  opacity: 0;
-}
-.tracer-1 {
-  width: 120px;
-  top: 28%;
-  left: -140px;
-  background: linear-gradient(90deg, transparent, rgba(249,115,22,0.7), transparent);
-  animation-duration: 3.2s;
-  animation-delay: 0.8s;
-}
-.tracer-2 {
-  width: 80px;
-  top: 55%;
-  left: -100px;
-  background: linear-gradient(90deg, transparent, rgba(6,182,212,0.5), transparent);
-  animation-duration: 2.6s;
-  animation-delay: 2.1s;
-}
-.tracer-3 {
-  width: 160px;
-  top: 42%;
-  right: -180px;
-  background: linear-gradient(270deg, transparent, rgba(249,115,22,0.5), transparent);
-  animation-duration: 3.8s;
-  animation-delay: 0.3s;
-  animation-direction: reverse;
-}
-
-@keyframes tracer-fly {
-  0%   { transform: translateX(0);    opacity: 0; }
-  5%   { opacity: 1; }
-  90%  { opacity: 0.8; }
-  100% { transform: translateX(110vw); opacity: 0; }
-}
-
-/* ── Corner Compass / HUD ── */
-.hud-compass {
-  position: absolute;
-  bottom: 28px;
-  right: 32px;
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  border: 1px solid rgba(249,115,22,0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 3;
-  animation: compass-spin 12s linear infinite;
-}
-.hud-compass::before {
-  content: '';
-  position: absolute;
-  inset: 6px;
-  border-radius: 50%;
-  border: 1px solid rgba(6,182,212,0.2);
-}
-.hud-compass::after {
-  content: 'N';
-  position: absolute;
-  top: 6px;
-  font-size: 8px;
-  font-family: monospace;
-  font-weight: 900;
-  color: rgba(249,115,22,0.8);
-  letter-spacing: 0;
-}
-
-@keyframes compass-spin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
-/* ── Radar Sweep ── */
-.radar-sweep {
-  position: absolute;
-  bottom: 28px;
-  right: 32px;
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  overflow: hidden;
-  z-index: 4;
+  right: 8%;
+  top: 22%;
+  z-index: 5;
   pointer-events: none;
 }
-.radar-sweep::after {
+.beacon-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #f97316;
+  box-shadow: 0 0 20px 6px rgba(249,115,22,0.8), 0 0 40px 12px rgba(249,115,22,0.4);
+  position: relative;
+  animation: beacon-pulse 1.4s ease-in-out infinite;
+}
+.beacon-dot::before,
+.beacon-dot::after {
   content: '';
   position: absolute;
   top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1.5px solid rgba(249,115,22,0.7);
+  animation: beacon-expand 1.4s ease-out infinite;
+}
+.beacon-dot::before { width: 28px; height: 28px; }
+.beacon-dot::after  { width: 52px; height: 52px; animation-delay: 0.4s; opacity: 0.5; }
+
+@keyframes beacon-pulse {
+  0%,100% { box-shadow: 0 0 20px 6px rgba(249,115,22,0.8), 0 0 40px 12px rgba(249,115,22,0.4); }
+  50%      { box-shadow: 0 0 30px 10px rgba(249,115,22,1), 0 0 60px 20px rgba(249,115,22,0.6); }
+}
+@keyframes beacon-expand {
+  0%   { transform: translate(-50%,-50%) scale(0.5); opacity: 1; }
+  100% { transform: translate(-50%,-50%) scale(2.5); opacity: 0; }
+}
+
+/* ── LARGE RADAR HUD ── */
+.radar-hud {
+  position: absolute;
+  bottom: 32px;
+  right: 36px;
+  width: 110px;
+  height: 110px;
+  z-index: 7;
+  pointer-events: none;
+}
+.radar-bg {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(6,182,212,0.07);
+  border: 1.5px solid rgba(6,182,212,0.45);
+  box-shadow: 0 0 20px 4px rgba(6,182,212,0.2), inset 0 0 20px rgba(6,182,212,0.1);
+}
+.radar-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(6,182,212,0.25);
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+}
+.radar-ring-1 { width: 55%; height: 55%; }
+.radar-ring-2 { width: 28%; height: 28%; }
+.radar-crosshair-h {
+  position: absolute;
+  top: 50%; left: 8%; right: 8%;
+  height: 1px;
+  background: rgba(6,182,212,0.3);
+  transform: translateY(-50%);
+}
+.radar-crosshair-v {
+  position: absolute;
+  left: 50%; top: 8%; bottom: 8%;
+  width: 1px;
+  background: rgba(6,182,212,0.3);
+  transform: translateX(-50%);
+}
+.radar-sweep-line {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  animation: radar-spin 3s linear infinite;
+}
+.radar-sweep-line::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
   width: 50%; height: 50%;
-  background: conic-gradient(from 0deg, rgba(249,115,22,0.5) 0deg, transparent 60deg);
-  transform-origin: 0% 100%;
-  animation: radar-rotate 3s linear infinite;
-  border-radius: 0 100% 0 0;
+  background: conic-gradient(from 270deg, rgba(249,115,22,0.7) 0deg, rgba(249,115,22,0.1) 55deg, transparent 80deg);
+  transform-origin: 100% 100%;
+}
+.radar-blip {
+  position: absolute;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #f97316;
+  box-shadow: 0 0 6px 2px rgba(249,115,22,0.8);
+  animation: blip-fade 3s ease-out infinite;
+}
+.blip-1 { top: 25%; left: 55%; animation-delay: 0.6s; }
+.blip-2 { top: 60%; left: 30%; animation-delay: 1.8s; }
+.blip-3 { top: 40%; left: 72%; animation-delay: 2.4s; width: 4px; height: 4px; background: #06b6d4; box-shadow: 0 0 6px 2px rgba(6,182,212,0.8); }
+.radar-label {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 9px;
+  font-family: monospace;
+  font-weight: 700;
+  color: rgba(6,182,212,0.7);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
-@keyframes radar-rotate {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+@keyframes radar-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes blip-fade {
+  0%   { opacity: 0; transform: scale(0.5); }
+  20%  { opacity: 1; transform: scale(1.2); }
+  60%  { opacity: 0.8; transform: scale(1); }
+  100% { opacity: 0; }
 }
 
-/* ── Hero Content Entrance ── */
+/* ── VIGNETTE ── */
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 90% 85% at 50% 50%, transparent 55%, rgba(0,0,0,0.55) 100%);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* ── HERO CONTENT ── */
 .hero-content {
   position: relative;
   z-index: 10;
-  animation: hero-fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: hero-fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @keyframes hero-fade-up {
-  from { opacity: 0; transform: translateY(28px); }
+  from { opacity: 0; transform: translateY(32px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Glowing Title ── */
+/* ── GLOWING TITLE ── */
 .hero-title-glow {
   text-shadow:
-    0 0 60px rgba(249, 115, 22, 0.25),
-    0 0 120px rgba(249, 115, 22, 0.10);
+    0 0 40px rgba(249, 115, 22, 0.35),
+    0 0 80px rgba(249, 115, 22, 0.15),
+    0 2px 4px rgba(0,0,0,0.8);
 }
 
-/* ── Parachute Drop Particles ── */
-@keyframes para-drop {
-  0%   { transform: translateY(-40px) rotate(-8deg); opacity: 0; }
-  10%  { opacity: 0.9; }
-  85%  { opacity: 0.7; }
-  100% { transform: translateY(120vh) rotate(8deg); opacity: 0; }
-}
-.para-drop {
-  position: absolute;
-  top: -40px;
-  font-size: 14px;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 2;
-  animation: para-drop linear infinite;
-  color: rgba(249,115,22,0.6);
-}
-.para-1 { left: 12%; animation-duration: 9s;  animation-delay: 0s;  }
-.para-2 { left: 28%; animation-duration: 13s; animation-delay: 3s;  font-size: 10px; color: rgba(6,182,212,0.5); }
-.para-3 { left: 67%; animation-duration: 11s; animation-delay: 6s;  font-size: 12px; }
-.para-4 { left: 82%; animation-duration: 15s; animation-delay: 1.5s; font-size: 9px; color: rgba(168,85,247,0.5); }
-.para-5 { left: 45%; animation-duration: 10s; animation-delay: 8s;  font-size: 11px; color: rgba(6,182,212,0.4); }
-
-/* ── Live Status Dot Pulse ── */
+/* ── LIVE DOT ── */
 @keyframes live-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(249,115,22,0.7); }
-  50%       { box-shadow: 0 0 0 5px rgba(249,115,22,0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(249,115,22,0.8); }
+  50%       { box-shadow: 0 0 0 6px rgba(249,115,22,0); }
 }
-.live-dot {
-  animation: live-pulse 1.5s ease-out infinite, beacon-blink 1.5s ease-in-out infinite;
+.live-dot { animation: live-pulse 1.4s ease-out infinite; }
+
+/* ── STAT CARD ENTRANCE ── */
+.stat-glow { animation: stat-in 1s cubic-bezier(0.16,1,0.3,1) both; }
+@keyframes stat-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Stat Counter Glow ── */
-.stat-glow {
-  animation: stat-counter-in 1s cubic-bezier(0.16,1,0.3,1) both;
+/* ── CTA BUTTON GLOW ── */
+.btn-primary-glow {
+  box-shadow: 0 0 30px rgba(249,115,22,0.3), 0 4px 16px rgba(0,0,0,0.4);
+  transition: box-shadow 0.2s, transform 0.15s;
 }
-@keyframes stat-counter-in {
-  from { opacity: 0; transform: scale(0.85); }
-  to   { opacity: 1; transform: scale(1); }
+.btn-primary-glow:hover {
+  box-shadow: 0 0 50px rgba(249,115,22,0.5), 0 8px 24px rgba(0,0,0,0.5);
+  transform: translateY(-1px);
 }
-
